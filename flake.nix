@@ -16,26 +16,27 @@
         inputs.treefmt-nix.flakeModule
       ];
 
-      perSystem = { pkgs, ... }:
-      let
-        jank-lang = pkgs.callPackage ./default.nix { };
-      in
-      {
-        packages = {
-          inherit jank-lang;
-          default = jank-lang;
-        };
+      perSystem =
+        { pkgs, ... }:
+        let
+          jank-lang = pkgs.callPackage ./default.nix { };
+        in
+        {
+          packages = {
+            inherit jank-lang;
+            default = jank-lang;
+          };
 
-        treefmt = {
-          projectRootFile = "flake.nix";
-          programs.nixfmt.enable = true;
-        };
+          treefmt = {
+            projectRootFile = "flake.nix";
+            programs.nixfmt.enable = true;
+          };
 
-        devShells.default = pkgs.mkShell {
-          packages = [
-            pkgs.nil
-          ];
+          devShells.default = pkgs.mkShell {
+            packages = [
+              pkgs.nil
+            ];
+          };
         };
-      };
     };
 }

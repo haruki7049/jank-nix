@@ -3,7 +3,7 @@
   fetchgit,
   lib,
   cmake,
-  ninja
+  ninja,
 }:
 
 clangStdenv.mkDerivation {
