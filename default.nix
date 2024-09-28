@@ -2,7 +2,6 @@
   stdenv,
   fetchFromGitHub,
   lib,
-  bash,
   cmake,
 }:
 
@@ -18,7 +17,6 @@ stdenv.mkDerivation rec {
   };
 
   nativeBuildInputs = [
-    bash
     cmake
   ];
 

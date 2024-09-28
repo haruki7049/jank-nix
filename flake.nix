@@ -18,8 +18,7 @@
 
       perSystem = { pkgs, ... }:
       let
-        jank-lang = pkgs.stdenv.mkDerivation {
-        };
+        jank-lang = pkgs.callPackage ./default.nix { };
       in
       {
         packages = {
