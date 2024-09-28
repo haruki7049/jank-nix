@@ -1,26 +1,29 @@
 {
-  stdenv,
-  fetchFromGitHub,
+  clangStdenv,
+  fetchgit,
   lib,
   cmake,
+  ninja
 }:
 
-stdenv.mkDerivation rec {
+clangStdenv.mkDerivation {
   pname = "jank";
   version = "0-unstable-2024-09-07";
 
-  src = fetchFromGitHub {
-    owner = "jank-lang";
-    repo = pname;
+  src = fetchgit {
+    url = "https://github.com/jank-lang/jank";
     rev = "e774da6e3d029c884caefa5c27922b25713b24f7";
-    hash = "sha256-oyeHDjVqUDxWB4xI5zbO0Q6HjugKLKbKMi+T7Vf8LsY=";
+    hash = "sha256-ePnFT0myTMNfDXouvjqzWAvDys7QLBlQSH8J0UO8Ps4=";
+    fetchSubmodules = true;
   };
 
   nativeBuildInputs = [
     cmake
+    ninja
   ];
 
   configurePhase = ''
+    cmake -S $src/compiler+runtime -GNinja
   '';
 
   meta = {
